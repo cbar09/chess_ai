@@ -5,11 +5,18 @@ public class Board {
     private byte[][] board;
 
     /*
+        Using individual bytes to represent each piece on an 8x8 board (array).
+        This will minimize memory footprint for each board state in AI search trees
+
+        BYTE REPRESENTATION
         0000 0000
         WBKQ RBNP
-
+        e.g. WHITE PAWN     = 1000 0001 in binary or 0x81 in hexadecimal
+        e.g. BLACK BISHOP   = 0100 0100 in binary or 0x44 in hexadecimal
      */
 
+
+    //NOTE: Probably want to move all these static variables/initializers to a separate file for readability
     private static final byte WHITE  = (byte)0x80;
     private static final byte BLACK  = (byte)0x40;
     private static final byte KING   = (byte)0x20;
@@ -30,26 +37,29 @@ public class Board {
     private static final byte[] BLACK_STARTING_RANK = {BLACK_ROOK, BLACK_KNIGHT, BLACK_BISHOP, BLACK_QUEEN, BLACK_KING, BLACK_BISHOP, BLACK_KNIGHT, BLACK_ROOK};
     private static final byte[] WHITE_STARTING_RANK = {WHITE_ROOK, WHITE_KNIGHT, WHITE_BISHOP, WHITE_QUEEN, WHITE_KING, WHITE_BISHOP, WHITE_KNIGHT, WHITE_ROOK};
 
-    //Inner Class for simplicity and denoting moves in algebraic notation (i.e. a2 - a4)
+    //Inner Class for simplicity and denoting moves in algebraic notation (i.e. a2 - a4) - NB: Also move to separate file
     private static class Square {
         int rank, file;
-        public static final String files = "abcdefgh";
+        public static final String FILES = "abcdefgh";
 
         public Square(int rank, int file){
             this.rank = rank;
             this.file = file;
         }
         public Square(String square){
-            if(square.length() != 2)
-                throw new IllegalArgumentException("Illegal Square: " + square + ", must be 2 exactly 2 characters");
-            this.rank = Character.getNumericValue(square.charAt(1)) - 1;
-            this.file = files.indexOf(square.charAt(0));
+            this(Character.getNumericValue(square.charAt(1)) - 1, FILES.indexOf(square.charAt(0)));
+            if(square.length() != 2 || this.rank < 0 || this.rank > 7 || this.file == -1) {
+                throw new IllegalArgumentException("Illegal Square: " + square + ", must be exactly 2 characters a1-h8");
+            }
         }
         public String toString(){
-            return Character.toString(files.charAt(file)) + (rank+1);
+            return Character.toString(FILES.charAt(file)) + (rank+1);
         }
     }
 
+    /*
+        ----- BOARD CLASS STARTS HERE -----
+     */
     public Board() {
         //Set up initial board
         board = new byte[8][8];
@@ -93,6 +103,7 @@ public class Board {
         return true;
     }
 
+    //method to convert byte piece to unicode char representation
     public static char toPiece(byte piece){
         switch(piece){
             case WHITE_KING:      return (char)0x2654; //♔
@@ -116,7 +127,7 @@ public class Board {
         Board b = new Board();
         System.out.println(b);
         Scanner s = new Scanner(System.in);
-        String move= null;
+        String move = null;
 
         while (!"q".equals(move)) {
             System.out.println("Enter next move in the form [fromSquare toSquare] (e.g. e2 e4) or type q to exit:");
