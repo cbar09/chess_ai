@@ -28,8 +28,8 @@ public class Officiator {
         Vector<String> moves = new Vector<String>();
 
         String[] output = new String[2];
-        output[0] = "a1b1";
-        output[1] = "a2b2";
+        output[0] = "a2a3";
+        output[1] = "b2b3";
         return gson.toJson(output);
     }
 }
