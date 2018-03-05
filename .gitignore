@@ -9,6 +9,3 @@
 
 # Remove IntelliJ specific folder (user settings)
 /.idea/workspace.xml
-
-# Screenshot
-chess_ai_officiator_screenshot1.jpg
