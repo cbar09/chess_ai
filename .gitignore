@@ -8,4 +8,4 @@
 /out
 
 # Remove IntelliJ specific folder (user settings)
-/.idea
+/.idea/workspace.xml
