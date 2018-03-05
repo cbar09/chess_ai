@@ -1,0 +1,11 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# Directory where intelliJ builds class files etc.
+/out
+
+# Remove IntelliJ specific folder (user settings)
+/.idea
