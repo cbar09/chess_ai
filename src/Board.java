@@ -70,6 +70,13 @@ public class Board {
         board[7] = BLACK_STARTING_RANK.clone();
     }
 
+    public Board(String[] moves) {
+        this();
+        for(String s: moves) {
+            makeMove(new Square(s.substring(0,2)), new Square(s.substring(2,4)));
+        }
+    }
+
     public byte getPiece(int row, int col){
         return board[row][col];
     }
