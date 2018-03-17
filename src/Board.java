@@ -4,39 +4,6 @@ import java.util.Scanner;
 public class Board {
     private byte[][] board;
 
-    /*
-        Using individual bytes to represent each piece on an 8x8 board (array).
-        This will minimize memory footprint for each board state in AI search trees
-
-        BYTE REPRESENTATION
-        0000 0000
-        WBKQ RBNP
-        e.g. WHITE PAWN     = 1000 0001 in binary or 0x81 in hexadecimal
-        e.g. BLACK BISHOP   = 0100 0100 in binary or 0x44 in hexadecimal
-     */
-
-
-    //NOTE: Probably want to move all these static variables/initializers to a separate file for readability
-    private static final byte WHITE  = (byte)0x80;
-    private static final byte BLACK  = (byte)0x40;
-    private static final byte KING   = (byte)0x20;
-    private static final byte QUEEN  = (byte)0x10;
-    private static final byte ROOK   = (byte)0x08;
-    private static final byte BISHOP = (byte)0x04;
-    private static final byte KNIGHT = (byte)0x02;
-    private static final byte PAWN   = (byte)0x01;
-    private static final byte EMPTY  = (byte)0x00;
-    private static final byte
-        WHITE_PAWN   = WHITE | PAWN,   BLACK_PAWN   = BLACK | PAWN,
-        WHITE_ROOK   = WHITE | ROOK,   BLACK_ROOK   = BLACK | ROOK,
-        WHITE_BISHOP = WHITE | BISHOP, BLACK_BISHOP = BLACK | BISHOP,
-        WHITE_KNIGHT = WHITE | KNIGHT, BLACK_KNIGHT = BLACK | KNIGHT,
-        WHITE_QUEEN  = WHITE | QUEEN,  BLACK_QUEEN  = BLACK | QUEEN,
-        WHITE_KING   = WHITE | KING,   BLACK_KING   = BLACK | KING;
-
-    private static final byte[] BLACK_STARTING_RANK = {BLACK_ROOK, BLACK_KNIGHT, BLACK_BISHOP, BLACK_QUEEN, BLACK_KING, BLACK_BISHOP, BLACK_KNIGHT, BLACK_ROOK};
-    private static final byte[] WHITE_STARTING_RANK = {WHITE_ROOK, WHITE_KNIGHT, WHITE_BISHOP, WHITE_QUEEN, WHITE_KING, WHITE_BISHOP, WHITE_KNIGHT, WHITE_ROOK};
-
     //Inner Class for simplicity and denoting moves in algebraic notation (i.e. a2 - a4) - NB: Also move to separate file
     private static class Square {
         int rank, file;
@@ -63,11 +30,11 @@ public class Board {
     public Board() {
         //Set up initial board
         board = new byte[8][8];
-        board[0] = WHITE_STARTING_RANK.clone();
-        Arrays.fill(board[1], WHITE_PAWN);
-        for(int i = 2; i < 6; i++) Arrays.fill(board[i], EMPTY);
-        Arrays.fill(board[6], BLACK_PAWN);
-        board[7] = BLACK_STARTING_RANK.clone();
+        board[0] = Piece.WHITE_STARTING_RANK.clone();
+        Arrays.fill(board[1], Piece.WHITE_PAWN);
+        for(int i = 2; i < 6; i++) Arrays.fill(board[i], Piece.EMPTY);
+        Arrays.fill(board[6], Piece.BLACK_PAWN);
+        board[7] = Piece.BLACK_STARTING_RANK.clone();
     }
 
     public Board(String[] moves) {
@@ -96,7 +63,7 @@ public class Board {
     public boolean makeMove(Square from, Square to){
         if(validMove(from, to)) {
             byte piece = board[from.rank][from.file];
-            board[from.rank][from.file] = EMPTY;
+            board[from.rank][from.file] = Piece.EMPTY;
             board[to.rank][to.file] = piece;
             return true;
         }
@@ -113,19 +80,19 @@ public class Board {
     //method to convert byte piece to unicode char representation
     public static char toPiece(byte piece){
         switch(piece){
-            case WHITE_KING:      return (char)0x2654; //♔
-            case WHITE_QUEEN:     return (char)0x2655; //♕
-            case WHITE_ROOK:      return (char)0x2656; //♖
-            case WHITE_BISHOP:    return (char)0x2657; //♗
-            case WHITE_KNIGHT:    return (char)0x2658; //♘
-            case WHITE_PAWN:      return (char)0x2659; //♙
-            case BLACK_KING:      return (char)0x265A; //♚
-            case BLACK_QUEEN:     return (char)0x265B; //♛
-            case BLACK_ROOK:      return (char)0x265C; //♜
-            case BLACK_BISHOP:    return (char)0x265D; //♝
-            case BLACK_KNIGHT:    return (char)0x265E; //♞
-            case BLACK_PAWN:      return (char)0x265F; //♟
-            case EMPTY:           return '_';
+            case Piece.WHITE_KING:      return (char)0x2654; //♔
+            case Piece.WHITE_QUEEN:     return (char)0x2655; //♕
+            case Piece.WHITE_ROOK:      return (char)0x2656; //♖
+            case Piece.WHITE_BISHOP:    return (char)0x2657; //♗
+            case Piece.WHITE_KNIGHT:    return (char)0x2658; //♘
+            case Piece.WHITE_PAWN:      return (char)0x2659; //♙
+            case Piece.BLACK_KING:      return (char)0x265A; //♚
+            case Piece.BLACK_QUEEN:     return (char)0x265B; //♛
+            case Piece.BLACK_ROOK:      return (char)0x265C; //♜
+            case Piece.BLACK_BISHOP:    return (char)0x265D; //♝
+            case Piece.BLACK_KNIGHT:    return (char)0x265E; //♞
+            case Piece.BLACK_PAWN:      return (char)0x265F; //♟
+            case Piece.EMPTY:           return '_';
         }
         return '_';
     }
