@@ -15,6 +15,11 @@ public class PieceHelper {
         return (piece & type) == type;
     }
 
+    public static boolean IsEmpty(byte piece)
+    {
+        return Is(piece,Piece.EMPTY);
+    }
+
     public static char toPieceChar(byte piece){
         switch(piece){
             case Piece.WHITE_KING:      return (char)0x2654; //♔

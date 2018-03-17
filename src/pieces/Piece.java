@@ -1,5 +1,7 @@
 package pieces;
 
+import board.Board;
+
 import java.util.Vector;
 
 public abstract class Piece {
@@ -16,12 +18,11 @@ public abstract class Piece {
         return PieceHelper.Is(pieceByte, type);
     }
 
-    public String[] GetLegalMoves(int rank, int file, Board board)
+    public Vector<String> GetLegalMoves(int rank, int file, Board board)
     {
-        String[] result = new String[0];
-        Vector<String> moves = GetLegalNormalMoves();
-        moves.addAll(GetLegalSpecialMoves());
-        return moves.toArray(result);
+        Vector<String> result = GetLegalNormalMoves();
+        result.addAll(GetLegalSpecialMoves());
+        return result;
     }
 
     public abstract Vector<String> GetLegalNormalMoves();
