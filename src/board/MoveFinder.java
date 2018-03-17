@@ -5,7 +5,7 @@ import pieces.PieceFactory;
 import java.util.Vector;
 
 public class MoveFinder {
-    public String[] FindMoves(Board board)
+    public static String[] FindMoves(Board board)
     {
         Vector<String> moves = new Vector<String>();
         for(int i=0; i<8; i++)

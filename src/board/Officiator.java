@@ -29,7 +29,7 @@ public class Officiator {
      */
     public static String GetLegalMovesFromPOST(Request request, Response response) {
         String[] moves = GSON.fromJson(request.body(), String[].class);
-        return GSON.toJson(new Board(moves).toString());
+        return GSON.toJson(new BoardResponse(new Board(moves)));
     }
 
     /**
@@ -43,7 +43,7 @@ public class Officiator {
      */
     public static String GetLegalMovesFromGET(Request request, Response response) {
         String[] moves = request.queryParams("moves").split(",");
-        return GSON.toJson(new Board(moves).toString());
+        return GSON.toJson(new BoardResponse(new Board(moves)));
     }
 
     public static void main(String[] args) {
