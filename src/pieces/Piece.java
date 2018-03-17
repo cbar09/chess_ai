@@ -1,6 +1,32 @@
 package pieces;
 
-public class Piece {
+import java.util.Vector;
+
+public abstract class Piece {
+
+    public final byte pieceByte;
+
+    public Piece(byte pieceByte)
+    {
+        this.pieceByte = pieceByte;
+    }
+
+    public boolean Is(byte type)
+    {
+        return PieceHelper.Is(pieceByte, type);
+    }
+
+    public String[] GetLegalMoves(int rank, int file, Board board)
+    {
+        String[] result = new String[0];
+        Vector<String> moves = GetLegalNormalMoves();
+        moves.addAll(GetLegalSpecialMoves());
+        return moves.toArray(result);
+    }
+
+    public abstract Vector<String> GetLegalNormalMoves();
+
+    public abstract Vector<String> GetLegalSpecialMoves();
 
     /*
         Using individual bytes to represent each piece on an 8x8 board (array).
@@ -34,4 +60,6 @@ public class Piece {
 
     public static final byte[] BLACK_STARTING_RANK = {BLACK_ROOK, BLACK_KNIGHT, BLACK_BISHOP, BLACK_QUEEN, BLACK_KING, BLACK_BISHOP, BLACK_KNIGHT, BLACK_ROOK};
     public static final byte[] WHITE_STARTING_RANK = {WHITE_ROOK, WHITE_KNIGHT, WHITE_BISHOP, WHITE_QUEEN, WHITE_KING, WHITE_BISHOP, WHITE_KNIGHT, WHITE_ROOK};
+
+
 }
