@@ -1,8 +1,10 @@
-import static spark.Spark.*;
+package board;
 
 import com.google.gson.Gson;
 import spark.Request;
 import spark.Response;
+
+import static spark.Spark.*;
 
 public class Officiator {
 
@@ -18,7 +20,7 @@ public class Officiator {
 
     /**
      * Handles a POST request that passes a JSON list of moves (simple array of strings like ["e2e4", "e7e5"]
-     * and creates a Board Object.  Makes the moves passed in on the board, and returns the board representation
+     * and creates a board.Board Object.  Makes the moves passed in on the board, and returns the board representation
      * (as a string) of the final position after all moves are made.
      *
      * @param request - request object that contains POST request sent to this class
@@ -32,7 +34,7 @@ public class Officiator {
 
     /**
      * Handles a GET request that passes a list of moves via query params - simple list of strings like ["e2e4", "e7e5"]
-     * that is split on commas into array of moves - and creates a Board Object with those moves made on the board.
+     * that is split on commas into array of moves - and creates a board.Board Object with those moves made on the board.
      * Returns the state of the chess board after those moves are made as a String representation.
      *
      * @param request - request object that contains POST request sent to this class
