@@ -1,3 +1,5 @@
+import pieces.Piece;
+
 import java.util.Arrays;
 import java.util.Scanner;
 

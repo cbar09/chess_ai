@@ -1,3 +1,5 @@
+package pieces;
+
 public class PieceHelper {
 
     public static boolean Is(byte piece, byte type)
