@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Board {
     private byte[][] board;
+    public String[] moves;
 
     //Inner Class for simplicity and denoting moves in algebraic notation (i.e. a2 - a4) - NB: Also move to separate file
     private static class Square {
@@ -40,6 +41,7 @@ public class Board {
         for(int i = 2; i < 6; i++) Arrays.fill(board[i], Piece.EMPTY);
         Arrays.fill(board[6], Piece.BLACK_PAWN);
         board[7] = Piece.BLACK_STARTING_RANK.clone();
+        this.moves = new String[0];
     }
 
     public Board(String[] moves) {
@@ -47,6 +49,7 @@ public class Board {
         for(String s: moves) {
             makeMove(new Square(s.substring(0,2)), new Square(s.substring(2,4)));
         }
+        this.moves = moves;
     }
 
     public byte getPiece(int row, int col){
