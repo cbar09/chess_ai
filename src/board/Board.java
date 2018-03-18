@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Board {
-    private byte[][] board;
+    public byte[][] board;
     public String[] moves;
 
     //Inner Class for simplicity and denoting moves in algebraic notation (i.e. a2 - a4) - NB: Also move to separate file
