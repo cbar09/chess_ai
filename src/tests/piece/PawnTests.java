@@ -60,4 +60,28 @@ public class PawnTests {
         assertEquals(1, PieceFactory.BuildPiece(Piece.BLACK_PAWN).GetLegalNormalMoves(5, 6, board).size());
         assertEquals(1, PieceFactory.BuildPiece(Piece.BLACK_PAWN).GetLegalNormalMoves(5, 7, board).size());
     }
+    @Test
+    public void Pawn_GetLegalNormalMoves_White_PawnAtEdgeOfBoard_ReturnsZeroMoves() {
+        Board board = new Board();
+        assertEquals(0, PieceFactory.BuildPiece(Piece.WHITE_PAWN).GetLegalNormalMoves(7, 0, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.WHITE_PAWN).GetLegalNormalMoves(7, 1, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.WHITE_PAWN).GetLegalNormalMoves(7, 2, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.WHITE_PAWN).GetLegalNormalMoves(7, 3, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.WHITE_PAWN).GetLegalNormalMoves(7, 4, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.WHITE_PAWN).GetLegalNormalMoves(7, 5, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.WHITE_PAWN).GetLegalNormalMoves(7, 6, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.WHITE_PAWN).GetLegalNormalMoves(7, 7, board).size());
+    }
+    @Test
+    public void Pawn_GetLegalNormalMoves_Black_PawnAtEdgeOfBoard_ReturnsZeroMoves() {
+        Board board = new Board();
+        assertEquals(0, PieceFactory.BuildPiece(Piece.BLACK_PAWN).GetLegalNormalMoves(0, 0, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.BLACK_PAWN).GetLegalNormalMoves(0, 1, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.BLACK_PAWN).GetLegalNormalMoves(0, 2, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.BLACK_PAWN).GetLegalNormalMoves(0, 3, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.BLACK_PAWN).GetLegalNormalMoves(0, 4, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.BLACK_PAWN).GetLegalNormalMoves(0, 5, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.BLACK_PAWN).GetLegalNormalMoves(0, 6, board).size());
+        assertEquals(0, PieceFactory.BuildPiece(Piece.BLACK_PAWN).GetLegalNormalMoves(0, 7, board).size());
+    }
 }
