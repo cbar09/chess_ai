@@ -82,4 +82,9 @@ public class PieceHelper {
         }
         return response;
     }
+
+    public static String RankFileToAlgebraic(int rank, int file)
+    {
+        return ""+((char)(file+97))+""+(rank+1);
+    }
 }

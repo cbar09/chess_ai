@@ -1,5 +1,7 @@
 package pieces;
 
+import board.Board;
+
 import java.util.Vector;
 
 public class Pawn extends Piece {
@@ -9,12 +11,31 @@ public class Pawn extends Piece {
     }
 
     @Override
-    public Vector<String> GetLegalNormalMoves() {
-        return new Vector<String>();
+    public Vector<String> GetLegalNormalMoves(int rank, int file, Board board) {
+        Vector<String> result =new Vector<String>();
+        if(PieceHelper.Is(board.getPiece(rank+getRankDirection(),file),Piece.EMPTY)){
+            result.add(PieceHelper.RankFileToAlgebraic(rank+getRankDirection(),file));
+        }
+        return result;
     }
 
     @Override
-    public Vector<String> GetLegalSpecialMoves() {
+    public Vector<String> GetLegalSpecialMoves(int rank, int file, Board board) {
         return new Vector<String>();
+    }
+
+    public int getRankDirection(){
+        if(Is(Piece.WHITE))
+        {
+            return 1;
+        }
+        else if(Is(Piece.BLACK))
+        {
+            return -1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 }

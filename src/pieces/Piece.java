@@ -20,14 +20,14 @@ public abstract class Piece {
 
     public Vector<String> GetLegalMoves(int rank, int file, Board board)
     {
-        Vector<String> result = GetLegalNormalMoves();
-        result.addAll(GetLegalSpecialMoves());
+        Vector<String> result = GetLegalNormalMoves(rank, file, board);
+        result.addAll(GetLegalSpecialMoves(rank, file, board));
         return result;
     }
 
-    public abstract Vector<String> GetLegalNormalMoves();
+    public abstract Vector<String> GetLegalNormalMoves(int rank, int file, Board board);
 
-    public abstract Vector<String> GetLegalSpecialMoves();
+    public abstract Vector<String> GetLegalSpecialMoves(int rank, int file, Board board);
 
     /*
         Using individual bytes to represent each piece on an 8x8 board (array).
