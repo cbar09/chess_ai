@@ -1,6 +1,7 @@
 package pieces;
 
 public class PieceFactory {
+    //TODO: Needs tests
     public static Piece BuildPiece(byte pieceByte)
     {
         Piece result = null;
