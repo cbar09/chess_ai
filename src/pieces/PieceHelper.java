@@ -46,7 +46,7 @@ public class PieceHelper {
         {
             response = Piece.BLACK;
         }
-        if(PieceHelper.Is(piece,Piece.WHITE))
+        else if(PieceHelper.Is(piece,Piece.WHITE))
         {
             response = Piece.WHITE;
         }
@@ -60,23 +60,23 @@ public class PieceHelper {
         {
             response = Piece.PAWN;
         }
-        if(PieceHelper.Is(piece,Piece.KNIGHT))
+        else if(PieceHelper.Is(piece,Piece.KNIGHT))
         {
             response = Piece.KNIGHT;
         }
-        if(PieceHelper.Is(piece,Piece.BISHOP))
+        else if(PieceHelper.Is(piece,Piece.BISHOP))
         {
             response = Piece.BISHOP;
         }
-        if(PieceHelper.Is(piece,Piece.ROOK))
+        else if(PieceHelper.Is(piece,Piece.ROOK))
         {
             response = Piece.ROOK;
         }
-        if(PieceHelper.Is(piece,Piece.QUEEN))
+        else if(PieceHelper.Is(piece,Piece.QUEEN))
         {
             response = Piece.QUEEN;
         }
-        if(PieceHelper.Is(piece,Piece.KING))
+        else if(PieceHelper.Is(piece,Piece.KING))
         {
             response = Piece.KING;
         }
@@ -86,5 +86,10 @@ public class PieceHelper {
     public static String RankFileToAlgebraic(int rank, int file)
     {
         return ""+((char)(file+97))+""+(rank+1);
+    }
+
+    public static String RankFilesToAlgebraicMove(int startRank, int startFile, int endRank, int endFile)
+    {
+        return RankFileToAlgebraic(startRank,startFile)+RankFileToAlgebraic(endRank,endFile);
     }
 }
