@@ -16,7 +16,7 @@ public class Pawn extends Piece {
         int nextRank = rank+getRankDirection();
         if(nextRank > 0 && nextRank < 8
             && PieceHelper.Is(board.getPiece(nextRank,file),Piece.EMPTY)){
-            result.add(PieceHelper.RankFileToAlgebraic(rank+getRankDirection(),file));
+            result.add(PieceHelper.RankFilesToAlgebraicMove(rank,file,rank+getRankDirection(),file));
         }
         return result;
     }
