@@ -88,8 +88,35 @@ public class PieceHelper {
         return ""+((char)(file+97))+""+(rank+1);
     }
 
+    // TODO: needs tests
     public static String RankFilesToAlgebraicMove(int startRank, int startFile, int endRank, int endFile)
     {
         return RankFileToAlgebraic(startRank,startFile)+RankFileToAlgebraic(endRank,endFile);
+    }
+
+    // TODO: needs tests
+    public static boolean AreSameColor(byte piece1, byte piece2)
+    {
+        return (Is(piece1,Piece.BLACK) && Is(piece2,Piece.BLACK)) ||
+                (Is(piece1,Piece.WHITE) && Is(piece2,Piece.WHITE));
+    }
+
+    // TODO: needs tests
+    public static boolean AreDifferentColor(byte piece1, byte piece2)
+    {
+        return (Is(piece1,Piece.WHITE) && Is(piece2,Piece.BLACK)) ||
+                (Is(piece1,Piece.BLACK) && Is(piece2,Piece.WHITE));
+    }
+
+    // TODO: needs tests
+    public static boolean IsValidDestination(byte piece, byte destination)
+    {
+        return IsEmpty(destination) || AreDifferentColor(piece, destination);
+    }
+
+    // TODO: needs tests
+    public static boolean IsOutOfRange(int rank, int file)
+    {
+        return rank < 0 || rank > 7 || file < 0 || file > 7;
     }
 }
