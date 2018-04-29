@@ -11,7 +11,16 @@ public class King extends Piece {
 
     @Override
     public Vector<String> GetLegalNormalMoves(int rank, int file, Board board) {
-        return new Vector<String>();
+        return GetLegalMovesFromRelativePosition(rank,file,board, new int[][]{
+                {1,0},
+                {1,1},
+                {1,-1},
+                {0,1},
+                {0,-1},
+                {-1,0},
+                {-1,1},
+                {-1,-1}
+        });
     }
 
     @Override
