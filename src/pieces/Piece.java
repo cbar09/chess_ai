@@ -29,6 +29,60 @@ public abstract class Piece {
 
     public abstract Vector<String> GetLegalSpecialMoves(int rank, int file, Board board);
 
+    // TODO: needs tests
+    public Vector<String> GetLegalMovesInPath(int rank, int file, Board board, int rankDirection, int fileDirection)
+    {
+        Vector<String> result = new Vector<String>();
+
+        boolean keepSearching = true;
+
+        int rankCurr = rank;
+        int fileCurr = file;
+
+        while(keepSearching)
+        {
+            rankCurr += rankDirection;
+            fileCurr += fileDirection;
+
+            if(PieceHelper.IsOutOfRange(rankCurr,fileCurr))
+            {
+                break;
+            }
+
+            byte pieceCurr = board.getPiece(rankCurr,fileCurr);
+
+            if(PieceHelper.IsValidDestination(pieceByte,pieceCurr))
+            {
+                result.add(PieceHelper.RankFilesToAlgebraicMove(rank,file,rankCurr,fileCurr));
+            }
+
+            keepSearching = PieceHelper.IsEmpty(pieceCurr);
+        }
+
+        return result;
+    }
+
+    public Vector<String> GetLegalMovesFromRelativePosition(int rank, int file, Board board, int[][] relativePositions)
+    {
+        Vector<String> result = new Vector<String>();
+        for(int i=0; i<relativePositions.length; i++)
+        {
+            int rankCurr = rank + relativePositions[i][0];
+            int fileCurr = file + relativePositions[i][1];
+
+            if(PieceHelper.IsOutOfRange(rankCurr,fileCurr)) { continue; }
+
+            byte pieceCurr = board.getPiece(rankCurr,fileCurr);
+
+            if(PieceHelper.IsValidDestination(pieceByte,pieceCurr))
+            {
+                result.add(PieceHelper.RankFilesToAlgebraicMove(rank,file,rankCurr,fileCurr));
+            }
+        }
+        return result;
+    }
+
+
     /*
         Using individual bytes to represent each piece on an 8x8 board (array).
         This will minimize memory footprint for each board state in AI search trees
