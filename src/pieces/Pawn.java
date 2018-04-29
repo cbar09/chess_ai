@@ -12,13 +12,9 @@ public class Pawn extends Piece {
 
     @Override
     public Vector<String> GetLegalNormalMoves(int rank, int file, Board board) {
-        Vector<String> result =new Vector<String>();
-        int nextRank = rank+getRankDirection();
-        if(nextRank > 0 && nextRank < 8
-            && PieceHelper.Is(board.getPiece(nextRank,file),Piece.EMPTY)){
-            result.add(PieceHelper.RankFilesToAlgebraicMove(rank,file,rank+getRankDirection(),file));
-        }
-        return result;
+        return GetLegalMovesFromRelativePosition(rank,file,board, new int[][]{
+                {getRankDirection(),0}
+        });
     }
 
     @Override
