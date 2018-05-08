@@ -46,7 +46,7 @@ public class PieceHelper {
         {
             response = Piece.BLACK;
         }
-        if(PieceHelper.Is(piece,Piece.WHITE))
+        else if(PieceHelper.Is(piece,Piece.WHITE))
         {
             response = Piece.WHITE;
         }
@@ -60,26 +60,63 @@ public class PieceHelper {
         {
             response = Piece.PAWN;
         }
-        if(PieceHelper.Is(piece,Piece.KNIGHT))
+        else if(PieceHelper.Is(piece,Piece.KNIGHT))
         {
             response = Piece.KNIGHT;
         }
-        if(PieceHelper.Is(piece,Piece.BISHOP))
+        else if(PieceHelper.Is(piece,Piece.BISHOP))
         {
             response = Piece.BISHOP;
         }
-        if(PieceHelper.Is(piece,Piece.ROOK))
+        else if(PieceHelper.Is(piece,Piece.ROOK))
         {
             response = Piece.ROOK;
         }
-        if(PieceHelper.Is(piece,Piece.QUEEN))
+        else if(PieceHelper.Is(piece,Piece.QUEEN))
         {
             response = Piece.QUEEN;
         }
-        if(PieceHelper.Is(piece,Piece.KING))
+        else if(PieceHelper.Is(piece,Piece.KING))
         {
             response = Piece.KING;
         }
         return response;
+    }
+
+    public static String RankFileToAlgebraic(int rank, int file)
+    {
+        return ""+((char)(file+97))+""+(rank+1);
+    }
+
+    // TODO: needs tests
+    public static String RankFilesToAlgebraicMove(int startRank, int startFile, int endRank, int endFile)
+    {
+        return RankFileToAlgebraic(startRank,startFile)+RankFileToAlgebraic(endRank,endFile);
+    }
+
+    // TODO: needs tests
+    public static boolean AreSameColor(byte piece1, byte piece2)
+    {
+        return (Is(piece1,Piece.BLACK) && Is(piece2,Piece.BLACK)) ||
+                (Is(piece1,Piece.WHITE) && Is(piece2,Piece.WHITE));
+    }
+
+    // TODO: needs tests
+    public static boolean AreDifferentColor(byte piece1, byte piece2)
+    {
+        return (Is(piece1,Piece.WHITE) && Is(piece2,Piece.BLACK)) ||
+                (Is(piece1,Piece.BLACK) && Is(piece2,Piece.WHITE));
+    }
+
+    // TODO: needs tests
+    public static boolean IsValidDestination(byte piece, byte destination)
+    {
+        return IsEmpty(destination) || AreDifferentColor(piece, destination);
+    }
+
+    // TODO: needs tests
+    public static boolean IsOutOfRange(int rank, int file)
+    {
+        return rank < 0 || rank > 7 || file < 0 || file > 7;
     }
 }

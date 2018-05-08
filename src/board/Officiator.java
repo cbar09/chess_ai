@@ -48,7 +48,7 @@ public class Officiator {
 
     public static void main(String[] args) {
         port(5678);
-        post("/post_legal_moves", Officiator::GetLegalMoves);
+        post("/post_legal_moves", Officiator::GetLegalMovesFromPOST);
         get("get_legal_moves", Officiator::GetLegalMovesFromGET);
     }
 }
